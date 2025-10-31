@@ -7,7 +7,12 @@
       "Bash(npm install)",
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
-      "Bash(npm run type-check:*)"
+      "Bash(npm run type-check:*)",
+      "Bash(npm run build:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(del nul 2)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
