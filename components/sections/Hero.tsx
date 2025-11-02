@@ -4,8 +4,11 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
+import { useLanguage } from '@/lib/language-context'
 
 export function Hero() {
+  const { t } = useLanguage()
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradients */}
@@ -26,7 +29,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold text-sm font-medium mb-8"
           >
             <Sparkles className="w-4 h-4" aria-hidden="true" />
-            <span>AI və Avtomatlaşdırma Həlləri</span>
+            <span>{t('AI və Avtomatlaşdırma Həlləri', 'AI & Automation Solutions')}</span>
           </motion.div>
 
           {/* Heading */}
@@ -36,8 +39,10 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-stone-light mb-6 leading-tight"
           >
-            AI və Avtomatlaşdırma ilə{' '}
-            <span className="text-gradient">biznesinizi</span> daha sürətli böyüdün
+            {t(
+              <>AI və Avtomatlaşdırma ilə <span className="text-gradient">biznesinizi</span> daha sürətli böyüdün</>,
+              <>Grow your <span className="text-gradient">business</span> faster with AI & Automation</>
+            )}
           </motion.h1>
 
           {/* Subtitle */}
@@ -47,7 +52,10 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl md:text-2xl text-stone-DEFAULT max-w-3xl mx-auto mb-10 leading-relaxed"
           >
-            Code Agency – data yönümlü həllər, ölçülə bilən nəticələr və premium UI/UX
+            {t(
+              'Code Agency – data yönümlü həllər, ölçülə bilən nəticələr və premium UI/UX',
+              'Code Agency – data-driven solutions, measurable results and premium UI/UX'
+            )}
           </motion.p>
 
           {/* CTAs */}
@@ -59,7 +67,7 @@ export function Hero() {
           >
             <Button asChild size="xl" className="group">
               <Link href="/quote" className="gap-2">
-                Təklif al
+                {t('Təklif al', 'Get Quote')}
                 <ArrowRight
                   className="w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden="true"
@@ -67,7 +75,7 @@ export function Hero() {
               </Link>
             </Button>
             <Button asChild size="xl" variant="outline">
-              <Link href="/projects">Layihələrimizi gör</Link>
+              <Link href="/projects">{t('Layihələrimizi gör', 'View Our Projects')}</Link>
             </Button>
           </motion.div>
 

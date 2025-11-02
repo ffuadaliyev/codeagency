@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { organizationSchema, websiteSchema } from '@/lib/schema'
+import { LanguageProvider } from '@/lib/language-context'
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -98,9 +99,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )

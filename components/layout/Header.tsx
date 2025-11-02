@@ -5,19 +5,20 @@ import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/language-context'
 
 const navigation = [
-  { name: 'Xidmətlər', href: '/services' },
-  { name: 'Layihələr', href: '/projects' },
-  { name: 'Proses', href: '/process' },
-  { name: 'Haqqımızda', href: '/about' },
-  { name: 'Blog', href: '/blog' },
+  { name: { az: 'Xidmətlər', en: 'Services' }, href: '/services' },
+  { name: { az: 'Layihələr', en: 'Projects' }, href: '/projects' },
+  { name: { az: 'Proses', en: 'Process' }, href: '/process' },
+  { name: { az: 'Haqqımızda', en: 'About' }, href: '/about' },
+  { name: { az: 'Blog', en: 'Blog' }, href: '/blog' },
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [currentLang, setCurrentLang] = useState<'az' | 'en'>('az')
+  const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,11 +57,11 @@ export function Header() {
           <div className="hidden lg:flex lg:items-center lg:gap-8">
             {navigation.map((item) => (
               <Link
-                key={item.name}
+                key={item.href}
                 href={item.href}
                 className="text-sm font-medium text-stone-DEFAULT hover:text-gold transition-colors link-hover focus-ring rounded px-2 py-1"
               >
-                {item.name}
+                {item.name[language]}
               </Link>
             ))}
           </div>
@@ -70,10 +71,10 @@ export function Header() {
             {/* Language Switcher */}
             <div className="hidden sm:flex items-center gap-1 bg-carbon-light rounded-lg p-1 border border-carbon-border">
               <button
-                onClick={() => setCurrentLang('az')}
+                onClick={() => setLanguage('az')}
                 className={cn(
                   'px-3 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
-                  currentLang === 'az'
+                  language === 'az'
                     ? 'bg-gold text-carbon'
                     : 'text-stone-DEFAULT hover:text-gold'
                 )}
@@ -82,10 +83,10 @@ export function Header() {
                 AZ
               </button>
               <button
-                onClick={() => setCurrentLang('en')}
+                onClick={() => setLanguage('en')}
                 className={cn(
                   'px-3 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
-                  currentLang === 'en'
+                  language === 'en'
                     ? 'bg-gold text-carbon'
                     : 'text-stone-DEFAULT hover:text-gold'
                 )}
@@ -97,7 +98,7 @@ export function Header() {
 
             {/* CTA Button */}
             <Button asChild className="hidden sm:inline-flex" size="default">
-              <Link href="/quote">Təklif al</Link>
+              <Link href="/quote">{t('Təklif al', 'Get Quote')}</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -119,32 +120,32 @@ export function Header() {
 
         {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-carbon-border">
+          <div className="lg:hidden mt-4 pb-4 border-t border-carbon-border bg-carbon/95 backdrop-blur-lg shadow-xl rounded-b-2xl">
             <div className="flex flex-col gap-2 mt-4">
               {navigation.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   className="text-base font-medium text-stone-DEFAULT hover:text-gold transition-colors px-4 py-3 rounded-lg hover:bg-carbon-light focus-ring"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.name}
+                  {item.name[language]}
                 </Link>
               ))}
               <div className="px-4 pt-2">
                 <Button asChild className="w-full" size="lg">
-                  <Link href="/quote">Təklif al</Link>
+                  <Link href="/quote">{t('Təklif al', 'Get Quote')}</Link>
                 </Button>
               </div>
               <div className="flex sm:hidden items-center gap-2 px-4 pt-2">
                 <button
                   onClick={() => {
-                    setCurrentLang('az')
+                    setLanguage('az')
                     setIsMobileMenuOpen(false)
                   }}
                   className={cn(
                     'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
-                    currentLang === 'az'
+                    language === 'az'
                       ? 'bg-gold text-carbon'
                       : 'bg-carbon-light text-stone-DEFAULT hover:text-gold'
                   )}
@@ -153,12 +154,12 @@ export function Header() {
                 </button>
                 <button
                   onClick={() => {
-                    setCurrentLang('en')
+                    setLanguage('en')
                     setIsMobileMenuOpen(false)
                   }}
                   className={cn(
                     'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
-                    currentLang === 'en'
+                    language === 'en'
                       ? 'bg-gold text-carbon'
                       : 'bg-carbon-light text-stone-DEFAULT hover:text-gold'
                   )}
