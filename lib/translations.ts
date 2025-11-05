@@ -184,12 +184,21 @@ export const translations = {
     }
   },
 
+  quote: {
+    title: { az: 'Təklif al', en: 'Get a Quote', ru: 'Получить предложение' },
+    subtitle: {
+      az: 'Layihəniz üçün pulsuz qiymətləndirmə və təklif alın',
+      en: 'Get a free assessment and quote for your project',
+      ru: 'Получите бесплатную оценку и предложение для вашего проекта'
+    }
+  },
+
   contact: {
     title: { az: 'Əlaqə', en: 'Contact', ru: 'Контакты' },
     subtitle: {
-      az: 'Suallarınız var? Bizimlə əlaqə saxlayın',
-      en: 'Have questions? Get in touch with us',
-      ru: 'Есть вопросы? Свяжитесь с нами'
+      az: 'Suallarınız var? Bizimlə əlaqə saxlayın, ən qısa zamanda cavab verəcəyik',
+      en: 'Have questions? Get in touch with us, we\'ll respond as soon as possible',
+      ru: 'Есть вопросы? Свяжитесь с нами, мы ответим как можно скорее'
     },
     form: {
       name: { az: 'Ad Soyad', en: 'Full Name', ru: 'Полное имя' },
