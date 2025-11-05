@@ -3,41 +3,85 @@
 import { Search, Lightbulb, Code, TestTube, Rocket } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/language-context'
 
-const steps = [
+const getSteps = (t: (az: string, en: string, ru?: string) => string) => [
   {
     icon: Search,
-    title: 'Audit & Təhlil',
-    description: 'Biznes ehtiyaclarınızın dərin təhlili və texniki audit',
-    details: ['Cari vəziyyətin qiymətləndirilməsi', 'Ehtiyacların müəyyənləşdirilməsi', 'Həll yollarının araşdırılması'],
+    title: t('Audit & Təhlil', 'Audit & Analysis', 'Аудит и анализ'),
+    description: t(
+      'Biznes ehtiyaclarınızın dərin təhlili və texniki audit',
+      'In-depth analysis of business needs and technical audit',
+      'Глубокий анализ бизнес-потребностей и технический аудит'
+    ),
+    details: [
+      t('Cari vəziyyətin qiymətləndirilməsi', 'Current state assessment', 'Оценка текущего состояния'),
+      t('Ehtiyacların müəyyənləşdirilməsi', 'Requirements identification', 'Определение требований'),
+      t('Həll yollarının araşdırılması', 'Solution exploration', 'Исследование решений'),
+    ],
   },
   {
     icon: Lightbulb,
-    title: 'Dizayn & Planlaşdırma',
-    description: 'Həll konsepsiyasının hazırlanması və arxitektura dizaynı',
-    details: ['UI/UX dizayn', 'Texniki arxitektura', 'Yol xəritəsi və büdcə'],
+    title: t('Dizayn & Planlaşdırma', 'Design & Planning', 'Дизайн и планирование'),
+    description: t(
+      'Həll konsepsiyasının hazırlanması və arxitektura dizaynı',
+      'Solution concept development and architecture design',
+      'Разработка концепции решения и архитектурный дизайн'
+    ),
+    details: [
+      t('UI/UX dizayn', 'UI/UX design', 'UI/UX дизайн'),
+      t('Texniki arxitektura', 'Technical architecture', 'Техническая архитектура'),
+      t('Yol xəritəsi və büdcə', 'Roadmap and budget', 'Дорожная карта и бюджет'),
+    ],
   },
   {
     icon: Code,
-    title: 'İnkişaf',
-    description: 'Çevik metodologiya ilə addım-addım kodlaşdırma',
-    details: ['Sprint əsaslı inkişaf', 'Kod rəyi və keyfiyyət', 'Davamlı inteqrasiya'],
+    title: t('İnkişaf', 'Development', 'Разработка'),
+    description: t(
+      'Çevik metodologiya ilə addım-addım kodlaşdırma',
+      'Step-by-step coding with agile methodology',
+      'Пошаговое программирование с гибкой методологией'
+    ),
+    details: [
+      t('Sprint əsaslı inkişaf', 'Sprint-based development', 'Разработка на основе спринтов'),
+      t('Kod rəyi və keyfiyyət', 'Code review and quality', 'Ревью кода и качество'),
+      t('Davamlı inteqrasiya', 'Continuous integration', 'Непрерывная интеграция'),
+    ],
   },
   {
     icon: TestTube,
-    title: 'Test & Optimallaşdırma',
-    description: 'Hərtərəfli test və performans yaxşılaşdırılması',
-    details: ['Avtomatik və manual test', 'Performans optimallaşdırması', 'Təhlükəsizlik yoxlanışı'],
+    title: t('Test & Optimallaşdırma', 'Testing & Optimization', 'Тестирование и оптимизация'),
+    description: t(
+      'Hərtərəfli test və performans yaxşılaşdırılması',
+      'Comprehensive testing and performance improvement',
+      'Комплексное тестирование и улучшение производительности'
+    ),
+    details: [
+      t('Avtomatik və manual test', 'Automated and manual testing', 'Автоматическое и ручное тестирование'),
+      t('Performans optimallaşdırması', 'Performance optimization', 'Оптимизация производительности'),
+      t('Təhlükəsizlik yoxlanışı', 'Security audit', 'Проверка безопасности'),
+    ],
   },
   {
     icon: Rocket,
-    title: 'Buraxılış & Dəstək',
-    description: 'İstehsala çıxarış və davamlı texniki dəstək',
-    details: ['Deployment və monitoring', 'İstifadəçi təlimi', '24/7 texniki dəstək'],
+    title: t('Buraxılış & Dəstək', 'Launch & Support', 'Запуск и поддержка'),
+    description: t(
+      'İstehsala çıxarış və davamlı texniki dəstək',
+      'Production launch and ongoing technical support',
+      'Запуск в продакшн и постоянная техническая поддержка'
+    ),
+    details: [
+      t('Deployment və monitoring', 'Deployment and monitoring', 'Развертывание и мониторинг'),
+      t('İstifadəçi təlimi', 'User training', 'Обучение пользователей'),
+      t('24/7 texniki dəstək', '24/7 technical support', 'Круглосуточная техподдержка'),
+    ],
   },
 ]
 
 export function ProcessSection() {
+  const { t } = useLanguage()
+  const steps = getSteps(t)
+
   return (
     <section className="py-24 lg:py-32 bg-carbon relative overflow-hidden">
       {/* Background decoration */}
@@ -52,10 +96,14 @@ export function ProcessSection() {
           className="text-center mb-16"
         >
           <h2 className="font-serif text-3xl md:text-5xl text-stone-light mb-4">
-            Bizim Proses
+            {t('Bizim Proses', 'Our Process', 'Наш процесс')}
           </h2>
           <p className="text-lg text-stone-DEFAULT max-w-3xl mx-auto">
-            Uğurlu layihələr üçün sistemli yanaşma
+            {t(
+              'Uğurlu layihələr üçün sistemli yanaşma',
+              'Systematic approach for successful projects',
+              'Системный подход для успешных проектов'
+            )}
           </p>
         </motion.div>
 

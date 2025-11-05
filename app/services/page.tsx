@@ -1,116 +1,110 @@
-import { Metadata } from 'next'
+'use client'
+
 import { Bot, Workflow, Brain, Globe, Database, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
-export const metadata: Metadata = {
-  title: 'Xidmətlər',
-  description:
-    'Code Agency xidmətləri: AI həlləri, avtomatlaşdırma, veb və mobil inkişaf, data science və daha çox.',
-}
-
-const services = [
+const getServices = (t: (az: string, en: string, ru?: string) => string) => [
   {
     id: 'chatbot',
     icon: Bot,
-    title: 'Chatbot & AI Köməkçilər',
-    description:
-      'Vebsayt, messencer və daxili sistemlər üçün dillə idarə olunan köməkçilər.',
+    title: translations.services.chatbot.title,
+    description: translations.services.chatbot.desc,
     features: [
-      'Məlumat bazası ilə inteqrasiya',
-      'Çoxdilli cavablar və kontekst yaddaşı',
-      'Sorğu yönləndirmə və avtomatik cavablandırma',
-      'Bilik bazası və hesabatlama',
-      '24/7 müştəri dəstəyi',
+      t('Məlumat bazası ilə inteqrasiya', 'Database integration', 'Интеграция с базой данных'),
+      t('Çoxdilli cavablar və kontekst yaddaşı', 'Multilingual responses and context memory', 'Многоязычные ответы и контекстная память'),
+      t('Sorğu yönləndirmə və avtomatik cavablandırma', 'Query routing and automatic responses', 'Маршрутизация запросов и автоматические ответы'),
+      t('Bilik bazası və hesabatlama', 'Knowledge base and reporting', 'База знаний и отчетность'),
+      t('24/7 müştəri dəstəyi', '24/7 customer support', 'Круглосуточная поддержка клиентов'),
     ],
     technologies: ['NLP', 'Machine Learning', 'API Integration'],
-    deliveryTime: '3-6 həftə',
+    deliveryTime: t('3-6 həftə', '3-6 weeks', '3-6 недель'),
   },
   {
     id: 'automation',
     icon: Workflow,
-    title: 'Avtomatlaşdırma Həlləri',
-    description:
-      'E-poçt, satış və müştəri münasibətləri proseslərinin avtomatlaşdırılması.',
+    title: translations.services.automation.title,
+    description: translations.services.automation.desc,
     features: [
-      'İş axını orkestri',
-      'Mütəmadi məlumat toplama və transformasiya',
-      'Bildiriş və eskalasiya sistemləri',
-      'Status izləmə və arxivləşdirmə',
-      'ROI ölçülməsi',
+      t('İş axını orkestri', 'Workflow orchestration', 'Оркестрация рабочих процессов'),
+      t('Mütəmadi məlumat toplama və transformasiya', 'Regular data collection and transformation', 'Регулярный сбор и преобразование данных'),
+      t('Bildiriş və eskalasiya sistemləri', 'Notification and escalation systems', 'Системы уведомлений и эскалации'),
+      t('Status izləmə və arxivləşdirmə', 'Status tracking and archiving', 'Отслеживание статуса и архивирование'),
+      t('ROI ölçülməsi', 'ROI measurement', 'Измерение ROI'),
     ],
     technologies: ['Workflow Automation', 'API Integration', 'Cloud Services'],
-    deliveryTime: '4-8 həftə',
+    deliveryTime: t('4-8 həftə', '4-8 weeks', '4-8 недель'),
   },
   {
     id: 'ai-integration',
     icon: Brain,
-    title: 'AI İntegrasiyası',
-    description:
-      'Mövcud biznes sistemlərinə AI modellərinin qoşulması.',
+    title: translations.services.ai.title,
+    description: translations.services.ai.desc,
     features: [
-      'Mətn, şəkil, səs və strukturlaşdırılmış data ilə iş',
-      'Tövsiyə və təsnifat sistemləri',
-      'Anomaliya aşkarlanması və proqnozlaşdırma',
-      'Özəl verilənlərlə incə-tənzimləmə',
-      'Giriş nəzarəti və təhlükəsizlik',
+      t('Mətn, şəkil, səs və strukturlaşdırılmış data ilə iş', 'Work with text, image, audio and structured data', 'Работа с текстом, изображениями, аудио и структурированными данными'),
+      t('Tövsiyə və təsnifat sistemləri', 'Recommendation and classification systems', 'Системы рекомендаций и классификации'),
+      t('Anomaliya aşkarlanması və proqnozlaşdırma', 'Anomaly detection and forecasting', 'Обнаружение аномалий и прогнозирование'),
+      t('Özəl verilənlərlə incə-tənzimləmə', 'Fine-tuning with custom data', 'Тонкая настройка на пользовательских данных'),
+      t('Giriş nəzarəti və təhlükəsizlik', 'Access control and security', 'Контроль доступа и безопасность'),
     ],
     technologies: ['Deep Learning', 'Computer Vision', 'NLP'],
-    deliveryTime: '6-12 həftə',
+    deliveryTime: t('6-12 həftə', '6-12 weeks', '6-12 недель'),
   },
   {
     id: 'web-mobile',
     icon: Globe,
-    title: 'Veb sayt & Mobil tətbiqlər',
-    description:
-      'Yüksək performanslı veb və mobil tətbiqlər, CMS inteqrasiyası.',
+    title: translations.services.web.title,
+    description: translations.services.web.desc,
     features: [
-      'Responsive və mobil-öncə dizayn',
-      'E-commerce və ödəniş inteqrasiyası',
-      'Rezervasiya və şəxsi kabinet',
-      'Çoxdillilik və SEO optimallaşdırma',
-      'Test və monitorinq',
+      t('Responsive və mobil-öncə dizayn', 'Responsive and mobile-first design', 'Адаптивный и мобильный дизайн'),
+      t('E-commerce və ödəniş inteqrasiyası', 'E-commerce and payment integration', 'Интеграция электронной коммерции и платежей'),
+      t('Rezervasiya və şəxsi kabinet', 'Booking and personal cabinet', 'Бронирование и личный кабинет'),
+      t('Çoxdillilik və SEO optimallaşdırma', 'Multilingual and SEO optimization', 'Многоязычность и SEO-оптимизация'),
+      t('Test və monitorinq', 'Testing and monitoring', 'Тестирование и мониторинг'),
     ],
     technologies: ['React', 'Next.js', 'React Native', 'TypeScript'],
-    deliveryTime: '4-12 həftə',
+    deliveryTime: t('4-12 həftə', '4-12 weeks', '4-12 недель'),
   },
   {
     id: 'data',
     icon: Database,
-    title: 'Scraping, Data Toplanması & Analiz',
-    description:
-      'Müxtəlif mənbələrdən dayanıqlı məlumat toplanması və analizi.',
+    title: translations.services.data.title,
+    description: translations.services.data.desc,
     features: [
-      'Strukturlaşdırma və keyfiyyət yoxlaması',
-      'Uzunmüddətli saxlanma və versiyalaşdırma',
-      'İnteraktiv dashboardlar',
-      'Axtarış və filter sistemləri',
-      'Periodik hesabatlar',
+      t('Strukturlaşdırma və keyfiyyət yoxlaması', 'Structuring and quality control', 'Структурирование и контроль качества'),
+      t('Uzunmüddətli saxlanma və versiyalaşdırma', 'Long-term storage and versioning', 'Долгосрочное хранение и версионирование'),
+      t('İnteraktiv dashboardlar', 'Interactive dashboards', 'Интерактивные панели'),
+      t('Axtarış və filter sistemləri', 'Search and filter systems', 'Системы поиска и фильтрации'),
+      t('Periodik hesabatlar', 'Periodic reports', 'Периодические отчеты'),
     ],
     technologies: ['Data Engineering', 'ETL', 'Analytics'],
-    deliveryTime: '3-8 həftə',
+    deliveryTime: t('3-8 həftə', '3-8 weeks', '3-8 недель'),
   },
   {
     id: 'ml',
     icon: TrendingUp,
-    title: 'Data Science & ML',
-    description:
-      'Proqnozlaşdırma, optimallaşdırma, klasterləşdirmə və NLP həlləri.',
+    title: translations.services.ml.title,
+    description: translations.services.ml.desc,
     features: [
-      'Eksperiment dizaynı və A/B test',
-      'Xüsusiyyət mühəndisliyi',
-      'Model izləmə və versiyalaşdırma',
-      'Ədalətlilik və izah edilə bilənlik',
-      'Production deployment',
+      t('Eksperiment dizaynı və A/B test', 'Experiment design and A/B testing', 'Дизайн экспериментов и A/B тестирование'),
+      t('Xüsusiyyət mühəndisliyi', 'Feature engineering', 'Инжиниринг признаков'),
+      t('Model izləmə və versiyalaşdırma', 'Model tracking and versioning', 'Отслеживание и версионирование моделей'),
+      t('Ədalətlilik və izah edilə bilənlik', 'Fairness and explainability', 'Справедливость и объяснимость'),
+      t('Production deployment', 'Production deployment', 'Развертывание в продакшн'),
     ],
     technologies: ['Python', 'ML Frameworks', 'MLOps'],
-    deliveryTime: '8-16 həftə',
+    deliveryTime: t('8-16 həftə', '8-16 weeks', '8-16 недель'),
   },
 ]
 
 export default function ServicesPage() {
+  const { language, t } = useLanguage()
+  const services = getServices(t)
+
   return (
     <div className="min-h-screen pt-24 pb-16">
       {/* Hero */}
@@ -118,11 +112,10 @@ export default function ServicesPage() {
         <div className="container px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="font-serif text-4xl md:text-6xl text-stone-light mb-6">
-              Bizim Xidmətlər
+              {t(translations.services.title.az, translations.services.title.en, translations.services.title.ru)}
             </h1>
             <p className="text-lg text-stone-DEFAULT">
-              Sizin biznes ehtiyaclarınıza uyğun geniş spektrli texnoloji həllər.
-              Hər xidmət üçün özəl yanaşma və keyfiyyət təminatı.
+              {t(translations.services.subtitle.az, translations.services.subtitle.en, translations.services.subtitle.ru)}
             </p>
           </div>
         </div>
@@ -145,16 +138,18 @@ export default function ServicesPage() {
                               <Icon className="w-7 h-7 text-gold" aria-hidden="true" />
                             </div>
                             <div>
-                              <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
+                              <CardTitle className="text-2xl mb-2">
+                                {t(service.title.az, service.title.en, service.title.ru)}
+                              </CardTitle>
                               <CardDescription className="text-base">
-                                {service.description}
+                                {t(service.description.az, service.description.en, service.description.ru)}
                               </CardDescription>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="p-0">
                           <h3 className="text-sm font-semibold text-stone-light mb-3">
-                            Əsas xüsusiyyətlər:
+                            {t('Əsas xüsusiyyətlər:', 'Key features:', 'Основные функции:')}
                           </h3>
                           <ul className="space-y-2 mb-6">
                             {service.features.map((feature) => (
@@ -175,16 +170,24 @@ export default function ServicesPage() {
                       </div>
                       <div className="bg-carbon border-l border-carbon-border p-8 flex flex-col justify-between">
                         <div>
-                          <div className="text-sm text-stone-DEFAULT mb-2">Çatdırılma müddəti</div>
+                          <div className="text-sm text-stone-DEFAULT mb-2">
+                            {t('Çatdırılma müddəti', 'Delivery time', 'Срок поставки')}
+                          </div>
                           <div className="text-2xl font-serif text-gold mb-6">
                             {service.deliveryTime}
                           </div>
                           <div className="text-sm text-stone-DEFAULT mb-4">
-                            * Layihənin mürəkkəbliyindən asılı olaraq dəyişə bilər
+                            {t(
+                              '* Layihənin mürəkkəbliyindən asılı olaraq dəyişə bilər',
+                              '* May vary depending on project complexity',
+                              '* Может варьироваться в зависимости от сложности проекта'
+                            )}
                           </div>
                         </div>
                         <Button asChild size="lg" className="w-full">
-                          <Link href="/quote">Təklif al</Link>
+                          <Link href="/quote">
+                            {t(translations.common.cta.getQuote.az, translations.common.cta.getQuote.en, translations.common.cta.getQuote.ru)}
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -201,14 +204,19 @@ export default function ServicesPage() {
         <div className="container px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-3xl text-stone-light mb-4">
-              Özəl həll lazımdır?
+              {t('Özəl həll lazımdır?', 'Need a custom solution?', 'Нужно индивидуальное решение?')}
             </h2>
             <p className="text-stone-DEFAULT mb-8">
-              Yuxarıdakı xidmətlər siyahısında axtardığınızı tapa bilmirsiniz? Gəlin sizin
-              spesifik ehtiyaclarınız üçün custom həll hazırlayaq.
+              {t(
+                'Yuxarıdakı xidmətlər siyahısında axtardığınızı tapa bilmirsiniz? Gəlin sizin spesifik ehtiyaclarınız üçün custom həll hazırlayaq.',
+                "Can't find what you're looking for in the services list above? Let's create a custom solution for your specific needs.",
+                'Не можете найти то, что ищете в списке услуг выше? Давайте создадим индивидуальное решение для ваших конкретных потребностей.'
+              )}
             </p>
             <Button asChild size="xl">
-              <Link href="/contact">Bizimlə əlaqə saxlayın</Link>
+              <Link href="/contact">
+                {t(translations.common.cta.contactUs.az, translations.common.cta.contactUs.en, translations.common.cta.contactUs.ru)}
+              </Link>
             </Button>
           </div>
         </div>
