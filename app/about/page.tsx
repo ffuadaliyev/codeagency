@@ -29,13 +29,14 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg text-stone-DEFAULT leading-relaxed mb-6">
-                Code Agency 2019-cu ildə Azərbaycanda təsis edilmiş, AI və avtomatlaşdırma
-                həlləri üzrə ixtisaslaşmış texnologiya şirkətidir. Biz sadəcə kod yazmırıq -
-                biznesinizin böyüməsi üçün ölçülə bilən həllər təqdim edirik.
+                Code Agency AI və avtomatlaşdırma həlləri üzrə ixtisaslaşmış texnologiya
+                şirkətidir. Biz sadəcə kod yazmırıq - biznesinizin böyüməsi üçün ölçülə bilən
+                həllər təqdim edirik.
               </p>
               <p className="text-lg text-stone-DEFAULT leading-relaxed">
-                50-dən çox uğurlu layihə, 40+ məmnun müştəri və 95% müştəri məmnuniyyəti
-                dərəcəsi ilə, biz Azərbaycanın aparıcı texnoloji tərəfdaşlarından biriyik.
+                Müasir texnologiyaları və best practice-ləri istifadə edərək, müştərilərimizə
+                rəqabət üstünlüyü qazandıran həllər təqdim edirik. Hər layihəyə unikal yanaşırıq
+                və sizin biznes məqsədlərinizə fokuslanırıq.
               </p>
             </div>
 
@@ -68,29 +69,40 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-lg bg-gold/20 flex items-center justify-center">
                   <Users className="w-6 h-6 text-gold" />
                 </div>
-                <h3 className="font-serif text-2xl text-stone-light">Komandamız</h3>
+                <h3 className="font-serif text-2xl text-stone-light">Xidmətlərimiz</h3>
               </div>
               <p className="text-stone-DEFAULT mb-6">
-                15+ ekspert: software mühəndisləri, data scienstlər, UI/UX dizaynerlər və
-                layihə menecerləri. Beynəlxalq təcrübə və lokal bilik birləşməsi.
+                Biz müştərilərimizə geniş spektrli texnoloji xidmətlər təqdim edirik:
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-                <div>
-                  <div className="text-3xl font-serif text-gold mb-1">10+</div>
-                  <div className="text-sm text-stone-DEFAULT">Developers</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-serif text-gold mb-1">3+</div>
-                  <div className="text-sm text-stone-DEFAULT">Data Scientists</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-serif text-gold mb-1">2+</div>
-                  <div className="text-sm text-stone-DEFAULT">Designers</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-serif text-gold mb-1">5+</div>
-                  <div className="text-sm text-stone-DEFAULT">İl təcrübə</div>
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ul className="text-stone-DEFAULT space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>AI və Machine Learning həlləri</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>Biznes proseslərin avtomatlaşdırılması</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>Veb və mobil tətbiq inkişafı</span>
+                  </li>
+                </ul>
+                <ul className="text-stone-DEFAULT space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>Data analitika və vizuallaşdırma</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>Cloud infrastruktur həlləri</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-gold mt-1">•</span>
+                    <span>Texniki məsləhət və konsultasiya</span>
+                  </li>
+                </ul>
               </div>
             </div>
 

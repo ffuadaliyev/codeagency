@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-type Language = 'az' | 'en'
+type Language = 'az' | 'en' | 'ru'
 
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (az: string | ReactNode, en: string | ReactNode) => string | ReactNode
+  t: (az: string | ReactNode, en: string | ReactNode, ru?: string | ReactNode) => string | ReactNode
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -18,7 +18,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Load language from localStorage on mount
   useEffect(() => {
     const savedLang = localStorage.getItem('language') as Language
-    if (savedLang && (savedLang === 'az' || savedLang === 'en')) {
+    if (savedLang && (savedLang === 'az' || savedLang === 'en' || savedLang === 'ru')) {
       setLanguageState(savedLang)
     }
   }, [])
@@ -30,8 +30,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   // Translation helper function
-  const t = (az: string, en: string) => {
-    return language === 'az' ? az : en
+  const t = (az: string | ReactNode, en: string | ReactNode, ru?: string | ReactNode) => {
+    if (language === 'az') return az
+    if (language === 'en') return en
+    return ru || en // Fallback to English if Russian not provided
   }
 
   return (

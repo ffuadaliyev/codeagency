@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils'
 import { useLanguage } from '@/lib/language-context'
 
 const navigation = [
-  { name: { az: 'Xidmətlər', en: 'Services' }, href: '/services' },
-  { name: { az: 'Layihələr', en: 'Projects' }, href: '/projects' },
-  { name: { az: 'Proses', en: 'Process' }, href: '/process' },
-  { name: { az: 'Haqqımızda', en: 'About' }, href: '/about' },
-  { name: { az: 'Blog', en: 'Blog' }, href: '/blog' },
+  { name: { az: 'Xidmətlər', en: 'Services', ru: 'Услуги' }, href: '/services' },
+  { name: { az: 'Layihələr', en: 'Projects', ru: 'Проекты' }, href: '/projects' },
+  { name: { az: 'Proses', en: 'Process', ru: 'Процесс' }, href: '/process' },
+  { name: { az: 'Haqqımızda', en: 'About', ru: 'О нас' }, href: '/about' },
+  { name: { az: 'Blog', en: 'Blog', ru: 'Блог' }, href: '/blog' },
 ]
 
 export function Header() {
@@ -73,7 +73,7 @@ export function Header() {
               <button
                 onClick={() => setLanguage('az')}
                 className={cn(
-                  'px-3 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
+                  'px-2.5 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
                   language === 'az'
                     ? 'bg-gold text-carbon'
                     : 'text-stone-DEFAULT hover:text-gold'
@@ -85,7 +85,7 @@ export function Header() {
               <button
                 onClick={() => setLanguage('en')}
                 className={cn(
-                  'px-3 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
+                  'px-2.5 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
                   language === 'en'
                     ? 'bg-gold text-carbon'
                     : 'text-stone-DEFAULT hover:text-gold'
@@ -94,11 +94,23 @@ export function Header() {
               >
                 EN
               </button>
+              <button
+                onClick={() => setLanguage('ru')}
+                className={cn(
+                  'px-2.5 py-1.5 text-xs font-medium rounded transition-colors focus-ring',
+                  language === 'ru'
+                    ? 'bg-gold text-carbon'
+                    : 'text-stone-DEFAULT hover:text-gold'
+                )}
+                aria-label="Русский"
+              >
+                RU
+              </button>
             </div>
 
             {/* CTA Button */}
             <Button asChild className="hidden sm:inline-flex" size="default">
-              <Link href="/quote">{t('Təklif al', 'Get Quote')}</Link>
+              <Link href="/quote">{t('Təklif al', 'Get Quote', 'Получить предложение')}</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -134,7 +146,7 @@ export function Header() {
               ))}
               <div className="px-4 pt-2">
                 <Button asChild className="w-full" size="lg">
-                  <Link href="/quote">{t('Təklif al', 'Get Quote')}</Link>
+                  <Link href="/quote">{t('Təklif al', 'Get Quote', 'Получить предложение')}</Link>
                 </Button>
               </div>
               <div className="flex sm:hidden items-center gap-2 px-4 pt-2">
@@ -144,7 +156,7 @@ export function Header() {
                     setIsMobileMenuOpen(false)
                   }}
                   className={cn(
-                    'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
+                    'flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
                     language === 'az'
                       ? 'bg-gold text-carbon'
                       : 'bg-carbon-light text-stone-DEFAULT hover:text-gold'
@@ -158,13 +170,27 @@ export function Header() {
                     setIsMobileMenuOpen(false)
                   }}
                   className={cn(
-                    'flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
+                    'flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
                     language === 'en'
                       ? 'bg-gold text-carbon'
                       : 'bg-carbon-light text-stone-DEFAULT hover:text-gold'
                   )}
                 >
                   EN
+                </button>
+                <button
+                  onClick={() => {
+                    setLanguage('ru')
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className={cn(
+                    'flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors focus-ring',
+                    language === 'ru'
+                      ? 'bg-gold text-carbon'
+                      : 'bg-carbon-light text-stone-DEFAULT hover:text-gold'
+                  )}
+                >
+                  RU
                 </button>
               </div>
             </div>

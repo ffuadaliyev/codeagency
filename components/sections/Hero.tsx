@@ -29,7 +29,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold text-sm font-medium mb-8"
           >
             <Sparkles className="w-4 h-4" aria-hidden="true" />
-            <span>{t('AI və Avtomatlaşdırma Həlləri', 'AI & Automation Solutions')}</span>
+            <span>{t('AI və Avtomatlaşdırma Həlləri', 'AI & Automation Solutions', 'Решения ИИ и Автоматизации')}</span>
           </motion.div>
 
           {/* Heading */}
@@ -41,7 +41,8 @@ export function Hero() {
           >
             {t(
               <>AI və Avtomatlaşdırma ilə <span className="text-gradient">biznesinizi</span> daha sürətli böyüdün</>,
-              <>Grow your <span className="text-gradient">business</span> faster with AI & Automation</>
+              <>Grow your <span className="text-gradient">business</span> faster with AI & Automation</>,
+              <>Развивайте свой <span className="text-gradient">бизнес</span> быстрее с ИИ и автоматизацией</>
             )}
           </motion.h1>
 
@@ -54,7 +55,8 @@ export function Hero() {
           >
             {t(
               'Code Agency – data yönümlü həllər, ölçülə bilən nəticələr və premium UI/UX',
-              'Code Agency – data-driven solutions, measurable results and premium UI/UX'
+              'Code Agency – data-driven solutions, measurable results and premium UI/UX',
+              'Code Agency – решения на основе данных, измеримые результаты и премиум UI/UX'
             )}
           </motion.p>
 
@@ -67,7 +69,7 @@ export function Hero() {
           >
             <Button asChild size="xl" className="group">
               <Link href="/quote" className="gap-2">
-                {t('Təklif al', 'Get Quote')}
+                {t('Təklif al', 'Get Quote', 'Получить предложение')}
                 <ArrowRight
                   className="w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden="true"
@@ -75,30 +77,8 @@ export function Hero() {
               </Link>
             </Button>
             <Button asChild size="xl" variant="outline">
-              <Link href="/projects">{t('Layihələrimizi gör', 'View Our Projects')}</Link>
+              <Link href="/projects">{t('Layihələrimizi gör', 'View Our Projects', 'Наши проекты')}</Link>
             </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-carbon-border"
-          >
-            {[
-              { label: 'Uğurlu Layihə', value: '50+' },
-              { label: 'Məmnun Müştəri', value: '40+' },
-              { label: 'İllik Təcrübə', value: '5+' },
-              { label: 'Komanda Üzvü', value: '15+' },
-            ].map((stat, index) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl md:text-4xl font-serif font-semibold text-gold mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-stone-DEFAULT">{stat.label}</div>
-              </div>
-            ))}
           </motion.div>
         </div>
       </div>
@@ -111,7 +91,7 @@ export function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
       >
         <div className="flex flex-col items-center gap-2 text-stone-DEFAULT text-xs">
-          <span>Daha çox</span>
+          <span>{t('Daha çox', 'Scroll down', 'Прокрутите вниз')}</span>
           <div className="w-px h-12 bg-gradient-to-b from-stone-DEFAULT to-transparent animate-pulse" />
         </div>
       </motion.div>
