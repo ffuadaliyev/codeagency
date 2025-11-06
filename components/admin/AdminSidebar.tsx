@@ -23,7 +23,7 @@ const menuItems = [
   { icon: Briefcase, label: 'Services', href: '/fdadmin/dashboard/services' },
   { icon: FolderKanban, label: 'Projects', href: '/fdadmin/dashboard/projects' },
   { icon: GitBranch, label: 'Process Steps', href: '/fdadmin/dashboard/process' },
-  { icon: Users, label: 'About / Team', href: '/fdadmin/dashboard/about' },
+  { icon: Users, label: 'Team', href: '/fdadmin/dashboard/team' },
   { icon: FileText, label: 'Blog Posts', href: '/fdadmin/dashboard/blog' },
   { icon: HelpCircle, label: 'FAQs', href: '/fdadmin/dashboard/faqs' },
   { icon: ShieldCheck, label: 'Values', href: '/fdadmin/dashboard/values' },
