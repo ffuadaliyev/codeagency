@@ -2,32 +2,8 @@
 
 import { Zap, Shield, TrendingUp, Scale } from 'lucide-react'
 import { motion } from 'framer-motion'
-
-const values = [
-  {
-    icon: Zap,
-    title: 'Sürət',
-    description: 'Həftələrlə yox, günlərlə dəyər. Çevik metodologiya və optimal texnoloji seçimlər.',
-  },
-  {
-    icon: Scale,
-    title: 'Miqyaslanma',
-    description:
-      'Artan tələbi avtomatik qarşılayan arxitektura. Gələcəyə hazır infrastruktur.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Şəffaflıq',
-    description:
-      'Göstəricilərlə ölçülən proses və nəticə. Real vaxt hesabatlar və metrikalar.',
-  },
-  {
-    icon: Shield,
-    title: 'Təhlükəsizlik',
-    description:
-      'Məlumat və axınların qorunması prioritetdir. Sənaye standartlarına uyğunluq.',
-  },
-]
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -51,6 +27,31 @@ const itemVariants = {
 }
 
 export function Values() {
+  const { t } = useLanguage()
+
+  const values = [
+    {
+      icon: Zap,
+      title: translations.values.speed.title,
+      description: translations.values.speed.desc,
+    },
+    {
+      icon: Scale,
+      title: translations.values.scale.title,
+      description: translations.values.scale.desc,
+    },
+    {
+      icon: TrendingUp,
+      title: translations.values.transparency.title,
+      description: translations.values.transparency.desc,
+    },
+    {
+      icon: Shield,
+      title: translations.values.security.title,
+      description: translations.values.security.desc,
+    },
+  ]
+
   return (
     <section className="py-24 lg:py-32 bg-carbon-light relative">
       {/* Decorative elements */}
@@ -65,10 +66,10 @@ export function Values() {
           className="text-center mb-16"
         >
           <h2 className="font-serif text-3xl md:text-5xl text-stone-light mb-4">
-            Bizim Dəyərlərimiz
+            {t(translations.values.title.az, translations.values.title.en, translations.values.title.ru)}
           </h2>
           <p className="text-lg text-stone-DEFAULT max-w-3xl mx-auto">
-            Hər layihəyə gətirdiyimiz əsas prinsiplər
+            {t(translations.values.subtitle.az, translations.values.subtitle.en, translations.values.subtitle.ru)}
           </p>
         </motion.div>
 
@@ -83,7 +84,7 @@ export function Values() {
             const Icon = value.icon
             return (
               <motion.div
-                key={value.title}
+                key={t(value.title.az, value.title.en, value.title.ru)}
                 variants={itemVariants}
                 className="group relative"
               >
@@ -95,10 +96,10 @@ export function Values() {
                     </div>
                   </div>
                   <h3 className="font-serif text-xl text-stone-light mb-3 group-hover:text-gold transition-colors">
-                    {value.title}
+                    {t(value.title.az, value.title.en, value.title.ru)}
                   </h3>
                   <p className="text-sm text-stone-DEFAULT leading-relaxed">
-                    {value.description}
+                    {t(value.description.az, value.description.en, value.description.ru)}
                   </p>
                 </div>
               </motion.div>
