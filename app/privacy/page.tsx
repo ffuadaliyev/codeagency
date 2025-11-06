@@ -1,20 +1,21 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Məxfilik Siyasəti',
-  description: 'Code Agency məxfilik siyasəti və məlumat qorunması.',
-}
+import { useLanguage } from '@/lib/language-context'
 
 export default function PrivacyPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen pt-24 pb-16">
       <section className="py-16 bg-gradient-to-b from-carbon to-carbon-light">
         <div className="container px-4">
           <div className="max-w-3xl mx-auto">
             <h1 className="font-serif text-4xl md:text-5xl text-stone-light mb-6">
-              Məxfilik Siyasəti
+              {t('Məxfilik Siyasəti', 'Privacy Policy', 'Политика конфиденциальности')}
             </h1>
-            <p className="text-sm text-stone-DEFAULT">Son yenilənmə: Yanvar 2024</p>
+            <p className="text-sm text-stone-DEFAULT">
+              {t('Son yenilənmə: Yanvar 2024', 'Last updated: January 2024', 'Последнее обновление: январь 2024')}
+            </p>
           </div>
         </div>
       </section>

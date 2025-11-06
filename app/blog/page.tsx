@@ -1,53 +1,70 @@
-import { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Code Agency blogu - AI, avtomatlaşdırma və texnologiya haqqında məqalələr.',
-}
-
-const posts = [
-  {
-    id: 'ai-business-2024',
-    title: 'AI-nın 2024-də biznesə təsiri',
-    excerpt: 'Süni intellekt texnologiyalarının müasir biznesə necə dəyər qatdığını araşdırırıq.',
-    category: 'AI & ML',
-    date: '2024-01-15',
-    readTime: '5 dəqiqə',
-    author: 'Code Agency Team',
-  },
-  {
-    id: 'automation-roi',
-    title: 'Avtomatlaşdırmada ROI hesablanması',
-    excerpt: 'Avtomatlaşdırma layihələrinin gəlirliliyini necə ölçmək olar.',
-    category: 'Avtomatlaşdırma',
-    date: '2024-01-10',
-    readTime: '7 dəqiqə',
-    author: 'Code Agency Team',
-  },
-  {
-    id: 'web-performance',
-    title: 'Veb performansının əhəmiyyəti',
-    excerpt: 'Sürətli veb saytların konversiyaya və SEO-ya təsiri.',
-    category: 'Web Development',
-    date: '2024-01-05',
-    readTime: '6 dəqiqə',
-    author: 'Code Agency Team',
-  },
-]
+import { useLanguage } from '@/lib/language-context'
 
 export default function BlogPage() {
+  const { t } = useLanguage()
+
+  const posts = [
+    {
+      id: 'ai-business-2024',
+      title: t('AI-nın 2024-də biznesə təsiri', 'AI Impact on Business in 2024', 'Влияние ИИ на бизнес в 2024 году'),
+      excerpt: t(
+        'Süni intellekt texnologiyalarının müasir biznesə necə dəyər qatdığını araşdırırıq.',
+        'Exploring how artificial intelligence technologies add value to modern business.',
+        'Исследуем, как технологии искусственного интеллекта добавляют ценность современному бизнесу.'
+      ),
+      category: 'AI & ML',
+      date: '2024-01-15',
+      readTime: t('5 dəqiqə', '5 min read', '5 мин'),
+      author: 'Code Agency Team',
+    },
+    {
+      id: 'automation-roi',
+      title: t('Avtomatlaşdırmada ROI hesablanması', 'ROI Calculation in Automation', 'Расчет ROI в автоматизации'),
+      excerpt: t(
+        'Avtomatlaşdırma layihələrinin gəlirliliyini necə ölçmək olar.',
+        'How to measure the profitability of automation projects.',
+        'Как измерить прибыльность проектов автоматизации.'
+      ),
+      category: t('Avtomatlaşdırma', 'Automation', 'Автоматизация'),
+      date: '2024-01-10',
+      readTime: t('7 dəqiqə', '7 min read', '7 мин'),
+      author: 'Code Agency Team',
+    },
+    {
+      id: 'web-performance',
+      title: t('Veb performansının əhəmiyyəti', 'Web Performance Importance', 'Важность производительности веб-сайтов'),
+      excerpt: t(
+        'Sürətli veb saytların konversiyaya və SEO-ya təsiri.',
+        'Impact of fast websites on conversion and SEO.',
+        'Влияние быстрых веб-сайтов на конверсию и SEO.'
+      ),
+      category: t('Veb İnkişaf', 'Web Development', 'Веб-разработка'),
+      date: '2024-01-05',
+      readTime: t('6 dəqiqə', '6 min read', '6 мин'),
+      author: 'Code Agency Team',
+    },
+  ]
+
   return (
     <div className="min-h-screen pt-24 pb-16">
       <section className="py-16 bg-gradient-to-b from-carbon to-carbon-light">
         <div className="container px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-serif text-4xl md:text-6xl text-stone-light mb-6">Blog</h1>
+            <h1 className="font-serif text-4xl md:text-6xl text-stone-light mb-6">
+              {t('Blog', 'Blog', 'Блог')}
+            </h1>
             <p className="text-lg text-stone-DEFAULT">
-              AI, avtomatlaşdırma və texnologiya haqqında yazılar
+              {t(
+                'AI, avtomatlaşdırma və texnologiya haqqında yazılar',
+                'Articles about AI, automation and technology',
+                'Статьи об ИИ, автоматизации и технологиях'
+              )}
             </p>
           </div>
         </div>
@@ -77,7 +94,9 @@ export default function BlogPage() {
                     <CardDescription>{post.excerpt}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-stone-DEFAULT">Müəllif: {post.author}</p>
+                    <p className="text-sm text-stone-DEFAULT">
+                      {t('Müəllif', 'Author', 'Автор')}: {post.author}
+                    </p>
                   </CardContent>
                 </Card>
               </Link>

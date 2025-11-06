@@ -1,23 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Github } from 'lucide-react'
-
-const footerLinks = {
-  company: [
-    { name: 'Haqqımızda', href: '/about' },
-    { name: 'Xidmətlər', href: '/services' },
-    { name: 'Layihələr', href: '/projects' },
-    { name: 'Proses', href: '/process' },
-  ],
-  resources: [
-    { name: 'Blog', href: '/blog' },
-    { name: 'Təklif al', href: '/quote' },
-    { name: 'Əlaqə', href: '/contact' },
-  ],
-  legal: [
-    { name: 'Məxfilik Siyasəti', href: '/privacy' },
-    { name: 'İstifadə Şərtləri', href: '/terms' },
-  ],
-}
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 const socialLinks = [
   { name: 'Facebook', href: '#', icon: Facebook },
@@ -27,7 +13,26 @@ const socialLinks = [
 ]
 
 export function Footer() {
+  const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
+
+  const footerLinks = {
+    company: [
+      { name: t('Haqqımızda', 'About', 'О нас'), href: '/about' },
+      { name: t('Xidmətlər', 'Services', 'Услуги'), href: '/services' },
+      { name: t('Layihələr', 'Projects', 'Проекты'), href: '/projects' },
+      { name: t('Proses', 'Process', 'Процесс'), href: '/process' },
+    ],
+    resources: [
+      { name: t('Blog', 'Blog', 'Блог'), href: '/blog' },
+      { name: t('Təklif al', 'Get Quote', 'Получить предложение'), href: '/quote' },
+      { name: t('Əlaqə', 'Contact', 'Контакты'), href: '/contact' },
+    ],
+    legal: [
+      { name: t('Məxfilik Siyasəti', 'Privacy Policy', 'Политика конфиденциальности'), href: '/privacy' },
+      { name: t('İstifadə Şərtləri', 'Terms of Service', 'Условия использования'), href: '/terms' },
+    ],
+  }
 
   return (
     <footer className="bg-carbon-light border-t border-carbon-border mt-24">
@@ -41,8 +46,11 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-stone-DEFAULT text-sm leading-relaxed mb-6">
-              AI və avtomatlaşdırma ilə biznesinizi daha sürətli böyüdün. Data yönümlü həllər,
-              ölçülə bilən nəticələr və premium UI/UX.
+              {t(
+                'AI və avtomatlaşdırma ilə biznesinizi daha sürətli böyüdün. Data yönümlü həllər, ölçülə bilən nəticələr və premium UI/UX.',
+                'Grow your business faster with AI and automation. Data-driven solutions, measurable results, and premium UI/UX.',
+                'Развивайте свой бизнес быстрее с помощью ИИ и автоматизации. Решения на основе данных, измеримые результаты и премиум UI/UX.'
+              )}
             </p>
             <div className="space-y-3">
               <a
@@ -61,14 +69,16 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-2 text-sm text-stone-DEFAULT">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <span>Bakı, Azərbaycan</span>
+                <span>{t('Bakı, Azərbaycan', 'Baku, Azerbaijan', 'Баку, Азербайджан')}</span>
               </div>
             </div>
           </div>
 
           {/* Company Links */}
           <div className="lg:col-span-2">
-            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">Şirkət</h3>
+            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">
+              {t(translations.footer.company.az, translations.footer.company.en, translations.footer.company.ru)}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
@@ -85,7 +95,9 @@ export function Footer() {
 
           {/* Resources */}
           <div className="lg:col-span-2">
-            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">Resurslar</h3>
+            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">
+              {t(translations.footer.resources.az, translations.footer.resources.en, translations.footer.resources.ru)}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -102,7 +114,9 @@ export function Footer() {
 
           {/* Legal */}
           <div className="lg:col-span-2">
-            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">Hüquqi</h3>
+            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">
+              {t(translations.footer.legal.az, translations.footer.legal.en, translations.footer.legal.ru)}
+            </h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
@@ -119,7 +133,9 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="lg:col-span-2">
-            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">Sosial</h3>
+            <h3 className="font-serif text-base font-semibold text-stone-light mb-4">
+              {t(translations.footer.social.az, translations.footer.social.en, translations.footer.social.ru)}
+            </h3>
             <div className="flex gap-3">
               {socialLinks.map((social) => {
                 const Icon = social.icon
@@ -144,10 +160,14 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-carbon-border">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-stone-DEFAULT text-center sm:text-left">
-              © {currentYear} Code Agency. Bütün hüquqlar qorunur.
+              © {currentYear} Code Agency. {t(translations.footer.rights.az, translations.footer.rights.en, translations.footer.rights.ru)}
             </p>
             <p className="text-xs text-stone-DEFAULT/70 text-center sm:text-right">
-              Premium həllər və innovasiya ilə hazırlanmışdır.
+              {t(
+                'Premium həllər və innovasiya ilə hazırlanmışdır.',
+                'Built with premium solutions and innovation.',
+                'Создано с премиальными решениями и инновациями.'
+              )}
             </p>
           </div>
         </div>
