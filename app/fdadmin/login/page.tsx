@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
       }
 
       // Redirect to admin dashboard
-      router.push('/admin/dashboard')
+      router.push('/fdadmin/dashboard')
       router.refresh()
     } catch (error) {
       setError('An error occurred. Please try again.')

@@ -25,7 +25,10 @@
       "Bash(timeout 15 bash:*)",
       "Bash(netstat:*)",
       "Bash(echo:*)",
-      "Bash(.env.example)"
+      "Bash(.env.example)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_fYo8PDW0TCal@ep-super-sea-ahn7ik3r-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma migrate:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_fYo8PDW0TCal@ep-super-sea-ahn7ik3r-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx tsx:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_fYo8PDW0TCal@ep-super-sea-ahn7ik3r-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx prisma generate:*)"
     ],
     "deny": [],
     "ask": []

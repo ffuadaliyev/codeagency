@@ -11,7 +11,7 @@ export default async function AdminDashboardLayout({
   const user = await getCurrentUser()
 
   if (!user) {
-    redirect('/admin/login')
+    redirect('/fdadmin/login')
   }
 
   return (
