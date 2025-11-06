@@ -20,7 +20,10 @@
       "Bash(.env)",
       "Bash(npx tsx:*)",
       "Bash(timeout 10 bash:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(timeout 15 bash -c 'until curl -s http://localhost:3000 > /dev/null 2>&1; do sleep 1; done && echo \"Server is ready at http://localhost:3000\"':*)",
+      "Bash(timeout 15 bash:*)",
+      "Bash(netstat:*)"
     ],
     "deny": [],
     "ask": []
