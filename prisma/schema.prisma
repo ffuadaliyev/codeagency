@@ -1,0 +1,198 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Admin user model
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Services model
+model Service {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  icon        String   // Icon name
+  titleAz     String
+  titleEn     String
+  titleRu     String
+  descAz      String
+  descEn      String
+  descRu      String
+  featuresAz  String   // JSON array as string
+  featuresEn  String   // JSON array as string
+  featuresRu  String   // JSON array as string
+  deliveryAz  String
+  deliveryEn  String
+  deliveryRu  String
+  priceRange  String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Projects model
+model Project {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  titleAz       String
+  titleEn       String
+  titleRu       String
+  categoryAz    String
+  categoryEn    String
+  categoryRu    String
+  descriptionAz String
+  descriptionEn String
+  descriptionRu String
+  image         String?
+  tagsAz        String   // JSON array as string
+  tagsEn        String   // JSON array as string
+  tagsRu        String   // JSON array as string
+  roi           String
+  durationAz    String
+  durationEn    String
+  durationRu    String
+  satisfaction  String
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Process Steps model
+model ProcessStep {
+  id          String   @id @default(uuid())
+  icon        String   // Icon name
+  titleAz     String
+  titleEn     String
+  titleRu     String
+  descAz      String
+  descEn      String
+  descRu      String
+  detailsAz   String   // JSON array as string
+  detailsEn   String   // JSON array as string
+  detailsRu   String   // JSON array as string
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// About page sections
+model AboutSection {
+  id        String   @id @default(uuid())
+  type      String   // 'hero', 'mission', 'values', 'team', etc.
+  titleAz   String
+  titleEn   String
+  titleRu   String
+  contentAz String
+  contentEn String
+  contentRu String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Team members
+model TeamMember {
+  id        String   @id @default(uuid())
+  nameAz    String
+  nameEn    String
+  nameRu    String
+  roleAz    String
+  roleEn    String
+  roleRu    String
+  bioAz     String?
+  bioEn     String?
+  bioRu     String?
+  image     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Blog posts
+model BlogPost {
+  id         String   @id @default(uuid())
+  slug       String   @unique
+  titleAz    String
+  titleEn    String
+  titleRu    String
+  excerptAz  String
+  excerptEn  String
+  excerptRu  String
+  contentAz  String   // Rich text HTML
+  contentEn  String   // Rich text HTML
+  contentRu  String   // Rich text HTML
+  categoryAz String
+  categoryEn String
+  categoryRu String
+  image      String?
+  author     String
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// FAQs
+model FAQ {
+  id         String   @id @default(uuid())
+  questionAz String
+  questionEn String
+  questionRu String
+  answerAz   String
+  answerEn   String
+  answerRu   String
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Values
+model Value {
+  id        String   @id @default(uuid())
+  icon      String   // Icon name
+  titleAz   String
+  titleEn   String
+  titleRu   String
+  descAz    String
+  descEn    String
+  descRu    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Form submissions (Quote & Contact)
+model Submission {
+  id        String   @id @default(uuid())
+  type      String   // 'quote' or 'contact'
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  message   String
+  data      String?  // Additional JSON data
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// Page content (Privacy, Terms, etc.)
+model PageContent {
+  id        String   @id @default(uuid())
+  page      String   @unique // 'privacy' or 'terms'
+  contentAz String   // Rich text HTML
+  contentEn String   // Rich text HTML
+  contentRu String   // Rich text HTML
+  updatedAt DateTime @updatedAt
+}

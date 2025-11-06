@@ -15,7 +15,12 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx prisma:*)",
+      "Bash(.env)",
+      "Bash(npx tsx:*)",
+      "Bash(timeout 10 bash:*)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []
