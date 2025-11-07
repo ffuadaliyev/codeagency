@@ -1,12 +1,13 @@
 'use client'
 
-import { Bot, Workflow, Brain, Globe, Database, TrendingUp } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/language-context'
 import { translations } from '@/lib/translations'
+import * as Icons from 'lucide-react'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,69 +30,45 @@ const itemVariants = {
   },
 }
 
-export function Services() {
-  const { t } = useLanguage()
+interface Service {
+  id: string
+  slug: string
+  icon: string
+  titleAz: string
+  titleEn: string
+  titleRu: string
+  descAz: string
+  descEn: string
+  descRu: string
+  featuresAz: string
+  featuresEn: string
+  featuresRu: string
+}
 
-  const services = [
-    {
-      icon: Bot,
-      title: translations.services.chatbot.title,
-      description: translations.services.chatbot.desc,
-      tags: [
-        t('24/7 Dəstək', '24/7 Support', 'Круглосуточная поддержка'),
-        t('Çoxdilli', 'Multilingual', 'Многоязычный'),
-        t('İnteqrasiya', 'Integration', 'Интеграция'),
-      ],
-      href: '/services#chatbot',
-    },
-    {
-      icon: Workflow,
-      title: translations.services.automation.title,
-      description: translations.services.automation.desc,
-      tags: [
-        t('ROI Artımı', 'ROI Growth', 'Рост ROI'),
-        t('Sürət', 'Speed', 'Скорость'),
-        t('Effektivlik', 'Efficiency', 'Эффективность'),
-      ],
-      href: '/services#automation',
-    },
-    {
-      icon: Brain,
-      title: translations.services.ai.title,
-      description: translations.services.ai.desc,
-      tags: [
-        t('Tövsiyə', 'Recommendation', 'Рекомендации'),
-        t('Proqnoz', 'Forecast', 'Прогноз'),
-        t('Təsnifat', 'Classification', 'Классификация'),
-      ],
-      href: '/services#ai-integration',
-    },
-    {
-      icon: Globe,
-      title: translations.services.web.title,
-      description: translations.services.web.desc,
-      tags: ['Responsive', 'PWA', 'E-commerce'],
-      href: '/services#web-mobile',
-    },
-    {
-      icon: Database,
-      title: translations.services.data.title,
-      description: translations.services.data.desc,
-      tags: [
-        t('Böyük Data', 'Big Data', 'Большие данные'),
-        t('Vizuallaşdırma', 'Visualization', 'Визуализация'),
-        t('Hesabatlar', 'Reports', 'Отчеты'),
-      ],
-      href: '/services#data',
-    },
-    {
-      icon: TrendingUp,
-      title: translations.services.ml.title,
-      description: translations.services.ml.desc,
-      tags: ['Predictive', 'NLP', 'Computer Vision'],
-      href: '/services#ml',
-    },
-  ]
+export function Services() {
+  const { language, t } = useLanguage()
+  const [services, setServices] = useState<Service[]>([])
+
+  useEffect(() => {
+    fetchServices()
+  }, [])
+
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('/api/services')
+      if (response.ok) {
+        const data = await response.json()
+        setServices(data.slice(0, 6)) // Yalnız ilk 6-nı göstər
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error)
+    }
+  }
+
+  const getIconComponent = (iconName: string) => {
+    const Icon = (Icons as any)[iconName]
+    return Icon || Icons.Box
+  }
 
   return (
     <section className="py-24 lg:py-32 bg-carbon relative overflow-hidden">
@@ -123,27 +100,35 @@ export function Services() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {services.map((service) => {
-            const Icon = service.icon
+            const Icon = getIconComponent(service.icon)
+            const title = language === 'az' ? service.titleAz : language === 'ru' ? service.titleRu : service.titleEn
+            const description = language === 'az' ? service.descAz : language === 'ru' ? service.descRu : service.descEn
+            const features = language === 'az'
+              ? JSON.parse(service.featuresAz)
+              : language === 'ru'
+              ? JSON.parse(service.featuresRu)
+              : JSON.parse(service.featuresEn)
+
             return (
-              <motion.div key={t(service.title.az, service.title.en, service.title.ru)} variants={itemVariants}>
-                <Link href={service.href} className="group block h-full">
+              <motion.div key={service.id} variants={itemVariants}>
+                <Link href={`/services#${service.slug}`} className="group block h-full">
                   <Card className="h-full hover:border-gold/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <CardHeader>
                       <div className="w-12 h-12 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
                         <Icon className="w-6 h-6 text-gold" aria-hidden="true" />
                       </div>
                       <CardTitle className="group-hover:text-gold transition-colors">
-                        {t(service.title.az, service.title.en, service.title.ru)}
+                        {title}
                       </CardTitle>
                       <CardDescription>
-                        {t(service.description.az, service.description.en, service.description.ru)}
+                        {description}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
-                        {service.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
+                        {features.slice(0, 3).map((feature: string, index: number) => (
+                          <Badge key={index} variant="outline" className="text-xs">
+                            {feature.substring(0, 20)}...
                           </Badge>
                         ))}
                       </div>
